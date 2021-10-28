@@ -61,3 +61,11 @@ roslaunch OW_arm42_moveit demo.launch
 rosrun move_bot move_in_straight_line
 ```
 Follow the prompt.
+
+## Sources extensively reffered while creating the package:
+1. http://wiki.ros.org/joint_state_publisher
+2. https://github.com/ros/joint_state_publisher
+3. https://gramaziokohler.github.io/compas_fab/latest/examples/03_backends_ros/08_ros_create_moveit_package_from_custom_urdf.html
+4. http://wiki.ros.org/joint_state_publisher
+5. https://gramaziokohler.github.io/compas_fab/latest/examples/03_backends_ros/08_ros_create_moveit_package_from_custom_urdf.html
+6. https://github.com/PickNikRobotics/rviz_visual_tools
