@@ -63,16 +63,16 @@ rosrun move_bot move_in_straight_line
 Follow the prompt.
 
 ## Videos
-
+### 1. Video showing the usage of terminal_joint_state_publisher.py (Controlled the imported urdf on rviz)
 https://user-images.githubusercontent.com/66770479/139361968-4cfb3c29-b7dc-448b-b55d-0e41d13838ae.mp4
 
-
+### 2. Video showing usage of control_joint_state_moveit and move_in_straight_line (Controlled the generated MoveIt package on rviz)
 https://user-images.githubusercontent.com/66770479/139361947-37f0cc80-018a-45a2-b8e8-63f434c955e5.mp4
 
 
 
 
-## Sources extensively reffered while creating the package:
+## Sources refered extensively while creating the package:
 1. http://wiki.ros.org/joint_state_publisher
 2. https://github.com/ros/joint_state_publisher
 3. https://gramaziokohler.github.io/compas_fab/latest/examples/03_backends_ros/08_ros_create_moveit_package_from_custom_urdf.html
