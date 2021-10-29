@@ -49,9 +49,9 @@ Follow the prompt. (NOTE: You can pass all values of velocity and effort as zero
 
 #### 3. move_in_straight_line
 A node to control the model import on MoveIt to achieve the required position ONLY through **straight lines**.
-(NOTE: This code is currently not in a working condition and needs refinement. The complete version of this code will be uploaded in another branch upon completion.)
+(**NOTE**: The kinematic constraints of the imported model will allow only specific paths to be followed. Also, a straight path is followed from current position to the starting position too, which may happen to lie outside the workspace or at null points of the manipulator. Thus, it is advised to first set the position of arm at some point closer to the starting point using _control_joint_state_moveit_ and then use _move_in_straight_line_.)
 
-(Expected) Usage:
+Usage:
 1. Launch the MoveIt model on rviz
 ```shell
 roslaunch OW_arm42_moveit demo.launch
