@@ -62,6 +62,16 @@ rosrun move_bot move_in_straight_line
 ```
 Follow the prompt.
 
+## Videos
+
+https://user-images.githubusercontent.com/66770479/139361968-4cfb3c29-b7dc-448b-b55d-0e41d13838ae.mp4
+
+
+https://user-images.githubusercontent.com/66770479/139361947-37f0cc80-018a-45a2-b8e8-63f434c955e5.mp4
+
+
+
+
 ## Sources extensively reffered while creating the package:
 1. http://wiki.ros.org/joint_state_publisher
 2. https://github.com/ros/joint_state_publisher
