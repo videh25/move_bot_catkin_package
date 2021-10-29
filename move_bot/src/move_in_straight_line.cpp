@@ -26,28 +26,25 @@ int main(int argc, char** argv){
     namespace rvt = rviz_visual_tools;
     moveit_visual_tools::MoveItVisualTools visual_tools("world");
     visual_tools.deleteAllMarkers();
-
+    visual_tools.trigger();
+    
     geometry_msgs::Pose start_pose;
     geometry_msgs::Pose target_pose;
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+    std::vector<geometry_msgs::Pose> waypoints;
 
     while(ros::ok()){
-        std::vector<geometry_msgs::Pose> waypoints = {};
+        waypoints = {};
+        moveit::core::RobotState start_state(*move_group_interface.getCurrentState());
+        const Eigen::Isometry3d& current_state = start_state.getGlobalLinkTransform("W3Eff");
+        std::cout << "Current Position: \n" << current_state.translation() << "\n";
 
-        start_pose = move_group_interface.getCurrentPose().pose;
-
+        std::cout << "\nEnter the start and target coordinates (x1 y1 z1 x2 y2 z2) to achieve: ";
+        std::cin >> start_pose.position.x >> start_pose.position.y >> start_pose.position.z >> target_pose.position.x >> target_pose.position.y >> target_pose.position.z;
         waypoints.push_back(start_pose);
-        std::cout << "\nEnter the target coordinates (x, y, z) to achieve: ";
-        std::cin >> target_pose.position.x >> target_pose.position.y >> target_pose.position.z;
         waypoints.push_back(target_pose);
-        
-        bool success = (move_group_interface.plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
-        if (success){
-            move_group_interface.execute(my_plan);
-        } else{
-            std::cout << "\nError Occured\n Maybe the point does not lie in the workspace.\n";
-        }
+        std::cout << waypoints.size() << "\n";
 
         moveit_msgs::RobotTrajectory rt;
         double fraction = move_group_interface.computeCartesianPath(waypoints,
@@ -55,23 +52,10 @@ int main(int argc, char** argv){
                                                         0.0,   // jump_threshold
                                                         rt);
 
-        // trajectory_processing::IterativeParabolicTimeParameterization iptp;
+        ROS_INFO("Visualizing line between the given points. (%.2f%% acheived)", fraction * 100.0);
+        visual_tools.publishPath(waypoints, rvt::LIME_GREEN, rvt::XLARGE);
+        std::cout << visual_tools.trigger() << "\n";
+        move_group_interface.execute(rt);
         
-        // bool success = iptp.computeTimeStamps(rt);
-        // ROS_INFO("Computed time stamp %s",success?"SUCCEDED":"FAILED");
-
-
-
-        ROS_INFO("Visualizing plan 4 (cartesian path) (%.2f%% acheived)", fraction * 100.0);
-
-        // moveit_msgs::RobotTrajectory trajectory;
-        // rt.getRobotTrajectoryMsg(trajectory);
-        my_plan.trajectory_ = rt;
-
-        visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
-        move_group_interface.execute(my_plan);
-        
-
     }
-    visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
 }
