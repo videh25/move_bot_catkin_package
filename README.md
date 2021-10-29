@@ -9,7 +9,7 @@ A catkin package to move any urdf loaded on rviz using joint_state_publisher and
 ### Description of Packages
 #### 1.OW_arm42v3
 Description of the OW_amr43 robotic arm.
-The package was provided.
+The package was provided. (NOTE: Minor changes were made to the package to import it properly in MoveIt.)
 #### 2. OW_arm42_moveit
 The OW_arm42v3 package imported on MoveIt.
 The package was created using moveit's setup assisstant.
